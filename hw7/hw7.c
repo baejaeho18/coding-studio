@@ -116,7 +116,7 @@ int main()
                 // move the cursor at (1, screen_height), call "fflush(stdout)", and wait for 10 msec.
                 gotoxy(1, screen_height);
                 fflush(stdout);
-                Mysleep(10);
+                MySleep(10);
 
                 // the user pressed ESC
                 if (kbhit() && getch() == ESC) 
