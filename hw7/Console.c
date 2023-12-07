@@ -2,9 +2,6 @@
    Console.c: console-related functions
       This file is for Windows
 */
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
 
