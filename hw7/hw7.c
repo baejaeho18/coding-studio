@@ -2,8 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
 #include "Console.h"
+
+// Console.c
+#include <windows.h>
+// Console.c
 
 #define ABS(x)      ((x) >  0  ? (x) : -(x))
 #define MAX(x, y)   ((x) > (y) ? (x) : (y))
@@ -43,6 +46,64 @@ void ShuffleIndex(CharBuffer* cb);
 
 // set x and y according to t
 void GetCharacterCoordinate(MovingCharacter* p, int t, int* px, int* py);
+
+
+// Console.c
+void clrscr(void)      // clear the screen
+{
+    COORD Cur = { 0, 0 };
+    unsigned long dwLen = 0;
+
+    int width = getWindowWidth();
+    int height = getWindowHeight();
+    int size = width * height;
+
+    gotoxy(1, 1);
+    FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ' ', size, Cur, &dwLen);
+    gotoxy(1, 1);
+}
+
+void gotoxy(int x, int y)   // move cursor to (x, y)
+{
+    COORD Pos = { (short)(x - 1), (short)(y - 1) };
+
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
+
+int getWindowWidth()
+{
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+
+    return (int)(csbi.srWindow.Right - csbi.srWindow.Left + 1);
+}
+
+int getWindowHeight()
+{
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+
+    return (int)(csbi.srWindow.Bottom - csbi.srWindow.Top + 1);
+}
+
+void EnableCursor(int enable)
+{
+    CONSOLE_CURSOR_INFO cursorInfo = { 0, };
+    cursorInfo.dwSize = 1;
+    cursorInfo.bVisible = enable;
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
+}
+
+void MySleep(int msec)
+{
+    Sleep(msec);
+}
+
+void MyPause()
+{
+    system("PAUSE");
+}
+// Console.c
 
 int main()
 {

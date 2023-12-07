@@ -5,6 +5,11 @@ Console.h: declarations for console - related functions
 #ifndef   __CONSOL__
 #define   __CONSOL__
 
+#ifdef _WINDOWS
+#include <windows.h>
+#include <conio.h>
+#endif // _WINDOWS
+
 void clrscr(void);              // Clear the console screen
 void gotoxy(int x, int y);      // Move the cursor to (x, y) coordinate
 
@@ -19,10 +24,6 @@ void EnableCursor(int enable);
 void MySleep(int msec);          // Wait for msec milliseconds
 void MyPause();                  // Wait for the Enter key
 
-#ifdef _WINDOWS
-#include <windows.h>
-#include <conio.h>
-#endif // _WINDOWS
 
 #if defined(_LINUX) || defined(_MAC)
     int kbhit();                  // Check if there is a key in the key buffer
