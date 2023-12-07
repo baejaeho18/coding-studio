@@ -237,9 +237,9 @@ void ShuffleIndex(CharBuffer* cb)
 
         if (max_idx != i) 
         {
-            struct CharBuffer temp = cb->index[i];
+            int temp = cb->index[i];
             cb->index[i] = cb->index[max_idx];
-            cb->chars[max_idx] = temp;
+            cb->index[max_idx] = temp;
         }
     }
 }

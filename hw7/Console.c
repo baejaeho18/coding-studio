@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "Console.h"
+
 
 #ifdef _WINDOWS
 // for windows
@@ -180,6 +182,13 @@ void MyPause()
 
 #endif    // defined(_LINUX) || defined(_MAC)
 
+void swap(int* pa, int* pb)
+{
+    int temp = *pa;
+    *pa = *pb;
+    *pb = temp;
+}
+
 
 void DrawLine(int x1, int y1, int x2, int y2, char c)
 {
@@ -220,11 +229,4 @@ void DrawLine(int x1, int y1, int x2, int y2, char c)
             printf("%c", c);
         }
     }
-}
-
-void swap(int* pa, int* pb)
-{
-    int temp = *pa;
-    *pa = *pb;
-    *pb = temp;
 }
